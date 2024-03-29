@@ -23,67 +23,87 @@ public class GoBoard {
                 x = scanner.nextInt();
                 System.out.println("Player 1, please enter the y coordinate of your move: ");
                 y = scanner.nextInt();
-                if (board[y - 1][x - 1] == "-|-") {
-                    board[y - 1][x - 1] = "-◯-";
-                    printBoard();
-                    turn++;
-                } else {
-                    System.out.println("Invalid move, please try again.");
+                if (checkBoundary(x, y) == false) {
+                    System.out.println("Invalid move. Please try again.");
                     continue;
                 }
+                if (x == 0) {
+                    board[y][x] = "x";}
+                else {
+                    board[y][x] = "-x";}
+                printBoard();
+                turn++;
+                
+                
             } else {
                 System.out.println("Player 2, please enter the x coordinate of your move: ");
                 x = scanner.nextInt();
                 System.out.println("Player 2, please enter the y coordinate of your move: ");
                 y = scanner.nextInt();
-                if (board[y - 1][x - 1] == "-|-") {
-                    board[y - 1][x - 1] = "-●-";
-                    printBoard();
-                    turn++;
-                } else {
-                    System.out.println("Invalid move, please try again.");
+                if (checkBoundary(x, y) == false) {
+                    System.out.println("Invalid move. Please try again.");
                     continue;
+                }
+                if (x == 0) {
+                    board[y][x] = "o";}
+                else {
+                    board[y][x] = "-o";}
+                printBoard();
+                turn++;
                 }
             }   
         }
-    }
+    
         
 
 
     static void initializeBoard() {
         for (int i = 0; i < 19; i++) {
             for (int j = 0; j < 19; j++) {
-                board[i][j] = "-|-";
+                if (i == 0) {
+                    if (j == 0) {
+                        board[i][j] = "┌";
+                    } else if (j == 18) {
+                        board[i][j] = "-┐";
+                    } else {
+                        board[i][j] = "-┬";
+                    }
+                } else if (i == 18) {
+                    if (j == 0) {
+                        board[i][j] = "└";
+                    } else if (j == 18) {
+                        board[i][j] = "-┘";
+                    } else {
+                        board[i][j] = "-┴";
+                    }
+                } else {
+                    if (j == 0) {
+                        board[i][j] = "├";
+                    } else if (j == 18) {
+                        board[i][j] = "-┤";
+                    } else {
+                        board[i][j] = "-┼";
+                    }
+
+                }
             }
         }
     }
-    static void checkBoundary() {
-        
+    static boolean checkBoundary(int x, int y) {
+        if (x < 0 || x > 18 || y < 0 || y > 18) {
+            return false;
+        }
+        return true;
+
     }
 
     static void printBoard() {
-        System.out.print("  ");
-        for (int t = 1; t < 20; t++) {
-            if (t < 10) {
-                System.out.print(" " + t + " ");
-            } else {
-                System.out.print(" " + t);
-            }
-        }
-
         for (int i = 0; i < 19; i++) {
             for (int j = 0; j < 19; j++) {
-                if (j % 19 == 0) {
-                    System.out.println();
-                    if (i < 9) {
-                        System.out.print(i + 1 + " ");
-                    } else {
-                        System.out.print(i + 1);
-                    }
-                }
                 System.out.print(board[i][j]);
             }
+            System.out.println();
+        
         }
-        System.out.println();
     }
 }
