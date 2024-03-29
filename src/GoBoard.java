@@ -16,14 +16,15 @@ public class GoBoard {
         int x = 0;
         int y = 0;
         int turn = 0;
+        
         while (true) {
             if (turn % 2 == 0) {
                 System.out.println("Player 1, please enter the x coordinate of your move: ");
                 x = scanner.nextInt();
                 System.out.println("Player 1, please enter the y coordinate of your move: ");
                 y = scanner.nextInt();
-                if (board[x - 1][y - 1] == "-|-") {
-                    board[x - 1][y - 1] = "-◯-";
+                if (board[y - 1][x - 1] == "-|-") {
+                    board[y - 1][x - 1] = "-◯-";
                     printBoard();
                     turn++;
                 } else {
@@ -35,17 +36,19 @@ public class GoBoard {
                 x = scanner.nextInt();
                 System.out.println("Player 2, please enter the y coordinate of your move: ");
                 y = scanner.nextInt();
-                if (board[x - 1][y - 1] == "-|-") {
-                    board[x - 1][y - 1] = "-●-";
+                if (board[y - 1][x - 1] == "-|-") {
+                    board[y - 1][x - 1] = "-●-";
                     printBoard();
                     turn++;
                 } else {
                     System.out.println("Invalid move, please try again.");
                     continue;
                 }
-            }
+            }   
         }
     }
+        
+
 
     static void initializeBoard() {
         for (int i = 0; i < 19; i++) {
@@ -53,6 +56,9 @@ public class GoBoard {
                 board[i][j] = "-|-";
             }
         }
+    }
+    static void checkBoundary() {
+        
     }
 
     static void printBoard() {
